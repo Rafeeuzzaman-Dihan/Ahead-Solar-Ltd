@@ -1,0 +1,171 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.vue';
+
+@theme {
+    --color-primary: #1b6ca8;
+    --color-primary-dark: #16527a;
+    --color-primary-light: #d6e8f5;
+    --color-accent: #f4a500;
+    --color-accent-light: #fef3dc;
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* Custom scrollbar for that premium feel */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+}
+
+/* ---------------------------------------------------------------------------
+   Inertia page transitions
+--------------------------------------------------------------------------- */
+.page-enter-active,
+.page-leave-active {
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.page-enter-from {
+    opacity: 0;
+    transform: translateY(12px);
+}
+.page-leave-to {
+    opacity: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Utility classes — glassmorphism, gradients, glow
+--------------------------------------------------------------------------- */
+@utility glass {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@utility glass-light {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+@utility text-gradient {
+    background: linear-gradient(120deg, #5eb3e8 0%, #1b6ca8 40%, #f4a500 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* Radial mesh background used on dark hero sections */
+@utility mesh-dark {
+    background-color: #020617;
+    background-image:
+        radial-gradient(at 18% 20%, rgba(27, 108, 168, 0.35) 0px, transparent 55%),
+        radial-gradient(at 82% 8%, rgba(244, 165, 0, 0.18) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(27, 108, 168, 0.22) 0px, transparent 55%);
+}
+
+@utility mesh-amber {
+    background-color: #0b0a07;
+    background-image:
+        radial-gradient(at 15% 15%, rgba(244, 165, 0, 0.35) 0px, transparent 55%),
+        radial-gradient(at 85% 25%, rgba(27, 108, 168, 0.25) 0px, transparent 50%),
+        radial-gradient(at 50% 95%, rgba(244, 165, 0, 0.2) 0px, transparent 55%);
+}
+
+/* Amber glow behind CTAs */
+@utility glow-accent {
+    box-shadow: 0 0 40px -8px rgba(244, 165, 0, 0.6);
+}
+@utility glow-primary {
+    box-shadow: 0 0 45px -10px rgba(27, 108, 168, 0.7);
+}
+
+/* GSAP reveal — JS sets the from-state; this is a no-JS fallback */
+.reveal {
+    opacity: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Keyframe animations
+--------------------------------------------------------------------------- */
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-18px);
+    }
+}
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-24px) rotate(3deg);
+    }
+}
+.animate-float-slow {
+    animation: float-slow 9s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(1.08);
+    }
+}
+.animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+    to {
+        transform: rotate(360deg);
+    }
+}
+.animate-spin-slow {
+    animation: spin-slow 24s linear infinite;
+}
+
+/* Diagonal section divider helper */
+.clip-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 4vw));
+}
